@@ -7,7 +7,9 @@ The original license is CPOL 1.02.
 
 Project link in CodeProject:
 https://www.codeproject.com/Articles/422497/ExpTreeLib-Version-3-Explorer-like-Navigation-and
+
 Original license link:
 https://www.codeproject.com/info/cpol10.aspx
 
 This is a very good user control to build your own Windows Explorer. But his proejct hadn't been maintained for several years. So I recompiled it, and did some improvments. The good thing is that I create new user contol which name is ExpListLib for list view based on Jim Parsells code. This will help us to build our own Windows Explorer easier.
+
