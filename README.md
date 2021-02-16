@@ -11,7 +11,7 @@ https://www.codeproject.com/Articles/422497/ExpTreeLib-Version-3-Explorer-like-N
 Original license link:
 https://www.codeproject.com/info/cpol10.aspx
 
-This is a very good user control to build your own Windows Explorer. But this proejct hasn't been maintained for several years. So I recompiled it, and did some improvments. The good thing is that I create new user contol which name is ExpListLib for list view based on Jim Parsells code. This will help us to build our own Windows Explorer easier.
+This is a very good user control to build your own Windows Explorer. But this proejct hasn't been maintained for several years, so I recompiled it, and did some improvments. The good thing is that I create new user contol which name is ExpListLib for list view based on Jim Parsells code. This will help us to build our own Windows Explorer easier.
 ![image](https://github.com/kaifuzi/ExpTreeLib/blob/main/ExpListLib_Demo.png)
 
 This control works very well in Win7, but in Win10, when I keep the application opening, it's crashed occasionally. I think it's because of memory overstack, but I haven't found out the reason. If you just open the application for a while, and then close, there is no problem.
