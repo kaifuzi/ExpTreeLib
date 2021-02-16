@@ -7,6 +7,7 @@ The original license is CPOL 1.02.
 
 Project link in CodeProject:
 https://www.codeproject.com/Articles/422497/ExpTreeLib-Version-3-Explorer-like-Navigation-and
+
 Original license link:
 https://www.codeproject.com/info/cpol10.aspx
 
