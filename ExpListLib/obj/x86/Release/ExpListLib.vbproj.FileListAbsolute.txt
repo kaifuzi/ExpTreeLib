@@ -1,0 +1,13 @@
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\bin\ExpListLib.dll
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\bin\ExpListLib.pdb
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\bin\ExpListLib.xml
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\bin\ExpTreeLib.dll
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\obj\x86\Release\ExpListLib.ExpList.resources
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\obj\x86\Release\ExpListLib.Resources.resources
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\obj\x86\Release\ExpListLib.vbproj.GenerateResource.Cache
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\obj\x86\Release\ExpListLib.dll
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\obj\x86\Release\ExpListLib.xml
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\obj\x86\Release\ExpListLib.pdb
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\obj\x86\Release\ExpListLib.vbprojResolveAssemblyReference.cache
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\bin\ExpTreeLib.pdb
+C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpListLib\bin\ExpTreeLib.xml
