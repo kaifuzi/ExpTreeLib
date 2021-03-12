@@ -144,10 +144,10 @@ Public Class ExpList
         Dim dirList As New ArrayList()
         Dim fileList As New ArrayList()
         Dim TotalItems As Integer
-        If CSI.DisplayName.Equals(CShItem.StrMyComputer) Then
-            dirList.AddRange(CSI.Directories) 'avoid re-query since only has dirs
-        Else
+        If includeFolder Then
             dirList.AddRange(CSI.Directories)
+        End If
+        If Not CSI.DisplayName.Equals(CShItem.StrMyComputer) Then 'avoid re-query since only has dirs
             fileList.AddRange(CSI.Files)
         End If
 
