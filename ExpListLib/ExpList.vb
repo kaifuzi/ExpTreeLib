@@ -137,9 +137,9 @@ Public Class ExpList
 #End Region
 
 #Region "   ExplorerTree Event Handling -- AfterNodeSelect"
-    Public Sub DisplayFiles(ByVal pathName As String, ByVal CSI As CShItem, ByVal includeFolder As Boolean)
+    Public Sub DisplayFiles(ByVal pathName As String, ByVal CSI As CShItem, ByVal includeFolder As Boolean, Optional reload As Boolean = False)
+        If LastSelectedCSI IsNot Nothing AndAlso LastSelectedCSI Is CSI AndAlso reload = False Then Exit Sub
         _CurrentPath = pathName
-        If LastSelectedCSI IsNot Nothing AndAlso LastSelectedCSI Is CSI Then Exit Sub
 
         Dim dirList As New ArrayList()
         Dim fileList As New ArrayList()

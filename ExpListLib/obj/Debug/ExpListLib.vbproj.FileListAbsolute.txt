@@ -4,7 +4,6 @@ C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\bin\ExpListLib.xml
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\bin\ExpTreeLib.dll
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\bin\ExpTreeLib.pdb
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\bin\ExpTreeLib.xml
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.vbprojResolveAssemblyReference.cache
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.ExpList.resources
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.Resources.resources
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.vbproj.GenerateResource.Cache
