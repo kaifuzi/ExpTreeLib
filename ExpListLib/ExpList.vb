@@ -116,7 +116,7 @@ Public Class ExpList
         'Setup Change Notification	7/1/2012
         AddHandler CShItemUpdate, AddressOf UpdateInvoke        '7/1/2012
 
-        'LuKai 2019.05.18:Remove column Type and Attributes, it also need to comment related code in MakeLVItem()
+        'LuKai 2021.01.30:Remove column Type and Attributes, it also need to comment related code in MakeLVItem()
         For Each column As ColumnHeader In ExpFileList.Columns
             If (column.Text = "Type") Or (column.Text = "Attributes") Then
                 ExpFileList.Columns.Remove(column)
@@ -214,7 +214,7 @@ Public Class ExpList
             .Tag = item
             'Set Length
             If Not item.IsDisk And item.IsFileSystem And Not item.IsFolder Then
-                'LuKai 2019.05.18:Change Length to Size
+                'LuKai 2021.01.30:Change Length to Size
                 'If item.Length > 1024 Then
                 '    .SubItems.Add(Format(item.Length / 1024, "#,### KB"))
                 'Else
@@ -234,7 +234,7 @@ Public Class ExpList
                 .SubItems.Add(item.LastWriteTime.ToString("MM/dd/yyyy HH:mm:ss"))
                 .SubItems(.SubItems.Count - 1).Tag = item.LastWriteTime
             End If
-            'LuKai 2019.05.18:Remove column Type and Attributes
+            'LuKai 2021.01.30:Remove column Type and Attributes
             ''Set Type
             '.SubItems.Add(item.TypeName)
             ''Set Attributes

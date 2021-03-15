@@ -10,3 +10,4 @@ C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListL
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.dll
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.xml
 C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.pdb
+C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpListLib\obj\Debug\ExpListLib.vbprojResolveAssemblyReference.cache
