@@ -56,7 +56,7 @@
             // 
             // expTree1
             // 
-            this.expTree1.AllowFolderRename = false;
+            this.expTree1.AllowFolderRename = true;
             this.expTree1.Cursor = System.Windows.Forms.Cursors.Default;
             this.expTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.expTree1.Location = new System.Drawing.Point(0, 0);

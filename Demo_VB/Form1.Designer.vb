@@ -50,7 +50,7 @@ Partial Class Form1
         '
         'ExpTree1
         '
-        Me.ExpTree1.AllowFolderRename = False
+        Me.ExpTree1.AllowFolderRename = True
         Me.ExpTree1.Cursor = System.Windows.Forms.Cursors.Default
         Me.ExpTree1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ExpTree1.Location = New System.Drawing.Point(0, 0)
