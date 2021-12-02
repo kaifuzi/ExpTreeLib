@@ -1,8 +1,0 @@
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\bin\ExpTreeLib.dll
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\bin\ExpTreeLib.pdb
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\bin\ExpTreeLib.xml
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\obj\Debug\ExpTreeLib.ExpTree.resources
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\obj\Debug\ExpTreeLib.vbproj.GenerateResource.Cache
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\obj\Debug\ExpTreeLib.dll
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\obj\Debug\ExpTreeLib.xml
-C:\Start\VS Program\Programs-Git\GitHub\ExpTreeLib\ExpTreeLib\obj\Debug\ExpTreeLib.pdb

@@ -1,9 +1,0 @@
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\bin\ExpTreeLib.dll
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\bin\ExpTreeLib.pdb
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\bin\ExpTreeLib.xml
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\obj\x86\Debug\ExpTreeLib.ExpTree.resources
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\obj\x86\Debug\ExpTreeLib.vbproj.GenerateResource.Cache
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\obj\x86\Debug\ExpTreeLib.dll
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\obj\x86\Debug\ExpTreeLib.xml
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\obj\x86\Debug\ExpTreeLib.pdb
-C:\Start\VS Program\Programs-TFS\IMS Project\FilesExplorer\ExpTreeLib\obj\x86\Debug\ExpTreeLib.vbprojResolveAssemblyReference.cache
