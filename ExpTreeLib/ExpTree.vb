@@ -20,7 +20,7 @@ Imports ExpTreeLib.SystemImageListManager
 ''' </summary>
 ''' <remarks>ExpTree raises one major Event, ExpTreeNodeSelected. That event is raised whenever the 
 ''' Selected TreeNode changes because of User Action (i.e. -- clicking on the node)</remarks>
-<DefaultProperty("StartUpDirectory"), DefaultEvent("StartUpDirectoryChanged")> _
+<DefaultProperty("StartUpDirectory"), DefaultEvent("StartUpDirectoryChanged")>
 Public Class ExpTree
     Inherits System.Windows.Forms.UserControl
 
@@ -112,7 +112,9 @@ Public Class ExpTree
         '
         'tv1
         '
+        Me.tv1.BackColor = System.Drawing.SystemColors.Window
         Me.tv1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tv1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.tv1.HideSelection = False
         Me.tv1.HotTracking = True
         Me.tv1.Location = New System.Drawing.Point(0, 0)
@@ -188,6 +190,30 @@ Public Class ExpTree
         End Set
     End Property
 
+#End Region
+
+#Region "   ForeColor/BackColor - Entire Region added 5/14/2014"
+    Public Overrides Property ForeColor() As System.Drawing.Color
+        Get
+            Return tv1.ForeColor
+        End Get
+        Set(ByVal value As System.Drawing.Color)
+            If value <> tv1.ForeColor Then
+                tv1.ForeColor = value
+            End If
+        End Set
+    End Property
+
+    Public Overrides Property BackColor() As System.Drawing.Color
+        Get
+            Return tv1.BackColor
+        End Get
+        Set(ByVal value As System.Drawing.Color)
+            If value <> tv1.ForeColor Then
+                tv1.BackColor = value
+            End If
+        End Set
+    End Property
 #End Region
 
 #Region "       RootItem"
@@ -506,7 +532,7 @@ XIT:    tv1.EndUpdate()
         ElseIf item.HasSubFolders Then
             newNode.Nodes.Add(New TreeNode(" : "))
         ElseIf item.IsHidden Then
-            If item.GetDirectories.Count > 0 Then
+            If item.DirCount > 0 Then           '02/12/2014
                 newNode.Nodes.Add(New TreeNode(" : "))
             End If
         End If
@@ -585,7 +611,13 @@ XIT:    tv1.EndUpdate()
     ''' Refactored code added 8/26/2012 so that this functionality could be used from more than one method.</remarks>
     Private Sub PopulateNode(ByVal NodeToFill As TreeNode)          '8/26/2012
         Dim CSI As CShItem = NodeToFill.Tag
-        Dim D As ArrayList = New ArrayList(CSI.Directories)
+        '02/12/2014 - Setting of D changed at suggestion of Michael Ruby
+        Dim D As ArrayList
+        If CSI.DirectoryList Is Nothing Then
+            D = New ArrayList(CSI.Directories)
+        Else
+            D = New ArrayList(CSI.DirectoryList)
+        End If
         If D.Count > 0 Then
             D.Sort()    'uses the class comparer
             NodeToFill.Nodes.Clear()    '11/03/2012 DO NOT Clear out the dummy prior to calling .Directories which forces a UpdateRefresh!
@@ -603,6 +635,15 @@ XIT:    tv1.EndUpdate()
 #Region "   TreeView AfterSelect Event"
     Private Sub Tv1_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles tv1.AfterSelect
         Dim CSI As CShItem = e.Node.Tag
+
+        '**********Added by Lukai-2021.12.02, If a folder is created by code "My.Computer.FileSystem.CreateDirectory(folderPath)", then this folder can't be shown automatically, I need to refresh it in here manually
+        If System.IO.Directory.Exists(CSI.Path) Then
+            If e.Node.GetNodeCount(False) <> System.IO.Directory.GetDirectories(CSI.Path).Length Then
+                CSI.UpdateRefresh(False, True)
+            End If
+        End If
+        '**********
+
         If EnableEventPost Then 'turned off during RefreshTree
             If CSI.Path.StartsWith(":") Then
                 RaiseEvent ExpTreeNodeSelected(CSI.DisplayName, CSI)
@@ -662,8 +703,7 @@ XIT:    tv1.EndUpdate()
     Private WithEvents expandNodeTimer As New System.Windows.Forms.Timer()
 
 #Region "       ExpandNodeTimer_Tick"
-    Private Sub ExpandNodeTimer_Tick(ByVal sender As Object, ByVal e As EventArgs) _
-       Handles expandNodeTimer.Tick
+    Private Sub ExpandNodeTimer_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles expandNodeTimer.Tick
         expandNodeTimer.Stop()
         If Not IsNothing(dropNode) Then
             RemoveHandler DropHandler.ShDragOver, AddressOf DragWrapper_ShDragOver
@@ -1061,14 +1101,15 @@ XIT:    tv1.EndUpdate()
                                     ElseIf e.Item.HasSubFolders Then
                                         UNode.Nodes.Add(New TreeNode(" : "))
                                     ElseIf e.Item.IsHidden Then
-                                        If e.Item.GetDirectories.Count > 0 Then
+                                        If e.Item.DirCount > 0 Then             '02/12/2014
                                             UNode.Nodes.Add(New TreeNode(" : "))
                                         End If
                                     End If
+                                    UNode.Collapse(False)   '02/12/2014 can only have 0 or 1 (dummy) node - collapse to avoid showing dummy
+                                    ' 02/12/2014 ElseIf Block recast and now uses DirCount rather than Directories
                                 ElseIf UNode.Nodes.Count = 1 AndAlso UNode.Nodes(0).Text.Equals(" : ") Then 'Should it still have dummy? (Folder may have been Deleted)
-                                    If Not e.Item.IsRemovable AndAlso
-                                       ((e.Item.IsHidden AndAlso e.Item.Directories.Length = 0) OrElse
-                                        Not e.Item.HasSubFolders) Then
+                                    If Not e.Item.IsRemovable AndAlso Not e.Item.HasSubFolders AndAlso
+                                       (e.Item.IsHidden AndAlso e.Item.DirCount = 0) Then
                                         UNode.Nodes.Clear()
                                     End If
                                 End If

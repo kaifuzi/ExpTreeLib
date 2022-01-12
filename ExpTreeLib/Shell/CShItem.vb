@@ -295,8 +295,8 @@ Public Class CShItem
         Dim tmpPidl As IntPtr
         HR = SHGetSpecialFolderLocation(0, CSIDL.DRIVES, tmpPidl)
         Dim shfi As New SHFILEINFO()
-        Dim dwflag As SHGFI = SHGFI.DISPLAYNAME Or _
-                                SHGFI.TYPENAME Or _
+        Dim dwflag As SHGFI = SHGFI.DISPLAYNAME Or
+                                SHGFI.TYPENAME Or
                                 SHGFI.PIDL
         Dim dwAttr As Integer = 0
         SHGetFileInfo(tmpPidl, dwAttr, shfi, cbFileInfo, dwflag)
@@ -315,9 +315,9 @@ Public Class CShItem
         m_IsBrowsable = False
         HR = SHGetDesktopFolder(m_Folder)
         m_Pidl = GetSpecialFolderLocation(IntPtr.Zero, CSIDL.DESKTOP)
-        dwflag = SHGFI.DISPLAYNAME Or _
-                 SHGFI.TYPENAME Or _
-                 SHGFI.SYSICONINDEX Or _
+        dwflag = SHGFI.DISPLAYNAME Or
+                 SHGFI.TYPENAME Or
+                 SHGFI.SYSICONINDEX Or
                  SHGFI.PIDL
         dwAttr = 0
         Dim H As IntPtr = SHGetFileInfo(m_Pidl, dwAttr, shfi, cbFileInfo, dwflag)
@@ -333,11 +333,11 @@ Public Class CShItem
         'also get local name for "My Documents"
         Dim pchEaten As Integer
         tmpPidl = IntPtr.Zero
-        HR = Me.Folder.ParseDisplayName(Nothing, Nothing, "::{450d8fba-ad25-11d0-98a8-0800361b1103}", _
+        HR = Me.Folder.ParseDisplayName(Nothing, Nothing, "::{450d8fba-ad25-11d0-98a8-0800361b1103}",
                  pchEaten, tmpPidl, Nothing)
         shfi = New SHFILEINFO()
-        dwflag = SHGFI.DISPLAYNAME Or _
-                                SHGFI.TYPENAME Or _
+        dwflag = SHGFI.DISPLAYNAME Or
+                                SHGFI.TYPENAME Or
                                 SHGFI.PIDL
         dwAttr = 0
         SHGetFileInfo(tmpPidl, dwAttr, shfi, cbFileInfo, dwflag)
@@ -503,7 +503,7 @@ Public Class CShItem
         If m_IsFolder AndAlso m_Path.Length = 3 AndAlso m_Path.Substring(1).Equals(":\") Then
             m_IsDisk = True
             Try                 '04/16/2012 Entire Try Block
-                Dim disk As New Management.ManagementObject("win32_logicaldisk.deviceid=""" & _
+                Dim disk As New Management.ManagementObject("win32_logicaldisk.deviceid=""" &
                                                Me.Path.Substring(0, 2) & """")
                 m_Length = CType(disk("Size"), UInt64).ToString
                 If CType(disk("DriveType"), UInt32).ToString = CStr(4) Then
@@ -765,7 +765,7 @@ Public Class CShItem
         If ID = CSIDL.MYDOCUMENTS AndAlso VistaOrAbove Then ID = CSIDL.PERSONAL 'added 11/28/2010
         If ID = CSIDL.MYDOCUMENTS Then  'original code - retain
             Dim pchEaten As Integer
-            HR = GetDeskTop.Folder.ParseDisplayName(Nothing, Nothing, "::{450d8fba-ad25-11d0-98a8-0800361b1103}", _
+            HR = GetDeskTop.Folder.ParseDisplayName(Nothing, Nothing, "::{450d8fba-ad25-11d0-98a8-0800361b1103}",
                      pchEaten, tmpPidl, Nothing)
         Else
             HR = SHGetSpecialFolderLocation(0, ID, tmpPidl)
@@ -1070,11 +1070,45 @@ Public Class CShItem
             ElseIf IsNothing(m_Directories) Then
                 m_Directories = GetContents(SHCONTF.FOLDERS Or SHCONTF.INCLUDEHIDDEN)
             Else        '6/30/2012 - Under some circumstances, Windows does not post MKDIR msgs when Folders are created!!! Do a refresh to ensure we are up to date
-                Me.UpdateRefresh(False, True)   '6/30/2012 - Note that it is also true that in some circumstances Windows does not post a RMDIR when Folders are removed.
+                '**********Comment by Lukai-2021.12.02, otherwise the rename function doesn't work, but after comment, it will affects tree updating, however performance is better
+                'Me.UpdateRefresh(False, True)   '6/30/2012 - Note that it is also true that in some circumstances Windows does not post a RMDIR when Folders are removed.
             End If
             Return m_Directories.ToArray
         End Get
     End Property
+    ''' <summary>
+    ''' Returns the number of Folders currently known to this instance. If not
+    ''' initialized, return 0
+    ''' </summary>
+    ''' <returns>The number of Folders currently known to this instance. If not
+    ''' initialized, return 0</returns>
+    ''' <remarks>Property added 02/10/2014 to avoid UpdateRefresh</remarks>
+    Public ReadOnly Property DirCount() As Integer
+        Get
+            If Me.FoldersInitialized Then
+                Return m_Directories.Count
+            Else
+                Return 0
+            End If
+        End Get
+    End Property
+    ''' <summary>
+    ''' Returns the number of Files currently known to this instance. If not
+    ''' initialized, return 0
+    ''' </summary>
+    ''' <returns>The number of Files currently known to this instance. If not
+    ''' initialized, return 0</returns>
+    ''' <remarks>Property added 02/10/2014 to avoid UpdateRefresh</remarks>
+    Public ReadOnly Property FileCount() As Integer
+        Get
+            If Me.FilesInitialized Then
+                Return m_Files.Count
+            Else
+                Return 0
+            End If
+        End Get
+    End Property
+
     ''' <summary>
     ''' For internal use only
     ''' </summary>
@@ -1177,8 +1211,8 @@ Public Class CShItem
                 Dim shfi As New SHFILEINFO With {
                     .dwAttributes = SFGAO.HASSUBFOLDER
                 }
-                Dim dwflag As SHGFI = SHGFI.PIDL Or _
-                                        SHGFI.ATTRIBUTES Or _
+                Dim dwflag As SHGFI = SHGFI.PIDL Or
+                                        SHGFI.ATTRIBUTES Or
                                         SHGFI.ATTR_SPECIFIED
                 Dim dwAttr As Integer = 0
                 Dim H As IntPtr = SHGetFileInfo(m_Pidl, dwAttr, shfi, cbFileInfo, dwflag)
@@ -1390,8 +1424,8 @@ Public Class CShItem
     Private Sub SetDispType()
         'Get Displayname, TypeName
         Dim shfi As New SHFILEINFO()
-        Dim dwflag As SHGFI = SHGFI.DISPLAYNAME Or _
-                                SHGFI.TYPENAME Or _
+        Dim dwflag As SHGFI = SHGFI.DISPLAYNAME Or
+                                SHGFI.TYPENAME Or
                                 SHGFI.PIDL
         Dim dwAttr As Integer = 0
         If m_IsFileSystem And Not m_IsFolder Then
@@ -1486,7 +1520,7 @@ Public Class CShItem
             If m_IconIndexNormalOrig < 0 Then
                 If Not m_HasDispType Then SetDispType()
                 Dim shfi As New SHFILEINFO()
-                Dim dwflag As SHGFI = SHGFI.PIDL Or _
+                Dim dwflag As SHGFI = SHGFI.PIDL Or
                                         SHGFI.SYSICONINDEX
                 Dim dwAttr As Integer = 0
                 If m_IsFileSystem And Not m_IsFolder Then
@@ -1514,8 +1548,8 @@ Public Class CShItem
                 If Not m_IsDisk And m_IsFileSystem And m_IsFolder Then
                     Dim dwflag As SHGFI = SHGFI.SYSICONINDEX Or SHGFI.PIDL
                     Dim shfi As New SHFILEINFO()
-                    Dim H As IntPtr = SHGetFileInfo(m_Pidl, 0, _
-                                      shfi, cbFileInfo, _
+                    Dim H As IntPtr = SHGetFileInfo(m_Pidl, 0,
+                                      shfi, cbFileInfo,
                                       dwflag Or SHGFI.OPENICON)
                     m_IconIndexOpenOrig = shfi.iIcon
                     If m_IconIndexOpen < 0 Then m_IconIndexOpen = SystemImageListManager.GetIconIndex(Me, True)
@@ -1762,8 +1796,8 @@ Public Class CShItem
                 Dim shfi As New SHFILEINFO With {
                     .dwAttributes = SFGAO.RDONLY
                 }
-                Dim dwflag As SHGFI = SHGFI.PIDL Or _
-                                        SHGFI.ATTRIBUTES Or _
+                Dim dwflag As SHGFI = SHGFI.PIDL Or
+                                        SHGFI.ATTRIBUTES Or
                                         SHGFI.ATTR_SPECIFIED
                 Dim dwAttr As Integer = 0
                 Dim H As IntPtr = SHGetFileInfo(m_Pidl, dwAttr, shfi, cbFileInfo, dwflag)
@@ -1836,8 +1870,8 @@ Public Class CShItem
     ''' always works on systems prior to XP.<br />
     ''' NOTE: if ancestor and current reference the same Item, both
     ''' methods return True</remarks>
-    Public Shared Function IsAncestorOf(ByVal ancestor As CShItem, _
-                                        ByVal current As CShItem, _
+    Public Shared Function IsAncestorOf(ByVal ancestor As CShItem,
+                                        ByVal current As CShItem,
                                         Optional ByVal fParent As Boolean = False) _
                                         As Boolean
         Return IsAncestorOf(ancestor.PIDL, current.PIDL, fParent)
@@ -1852,8 +1886,8 @@ Public Class CShItem
     ''' <returns>True if AncestorPidl is an ancestor of ChildPidl.
     '''          If fParent is False then will also return True if AncestorPidl and ChildPidl are equal. 
     '''          If fParent is True, <i>only</i> returns True if AncestorPidl is the Parent of ChildPidl</returns>
-    Public Shared Function IsAncestorOf(ByVal AncestorPidl As IntPtr, _
-                                        ByVal ChildPidl As IntPtr, _
+    Public Shared Function IsAncestorOf(ByVal AncestorPidl As IntPtr,
+                                        ByVal ChildPidl As IntPtr,
                                         Optional ByVal fParent As Boolean = False) _
                                         As Boolean
         If Is2KOrAbove() Then
@@ -1880,8 +1914,8 @@ Public Class CShItem
     ''' file and directory in and below an Folder CShItem.
     '''</summary>
     ''' <example>Dim DWalk as New CshItem.WalkAllCallBack(addressof yourroutine)</example>
-    Public Delegate Function WalkAllCallBack(ByVal info As CShItem, _
-                                             ByVal UserLevel As Integer, _
+    Public Delegate Function WalkAllCallBack(ByVal info As CShItem,
+                                             ByVal UserLevel As Integer,
                                              ByVal Tag As Integer) _
                                              As Boolean
     '''<summary>
@@ -1898,9 +1932,9 @@ Public Class CShItem
     ''' <returns>True to continue Walk, False if Callback said to stop</returns>
     ''' <remarks>It is much more efficient to implement this Function (without CallBack) in the application.</remarks>
     ''' 
-    Public Shared Function AllFolderWalk(ByVal cStart As CShItem, _
-                                          ByVal cback As WalkAllCallBack, _
-                                          ByVal UserLevel As Integer, _
+    Public Shared Function AllFolderWalk(ByVal cStart As CShItem,
+                                          ByVal cback As WalkAllCallBack,
+                                          ByVal UserLevel As Integer,
                                           ByVal Tag As Integer) _
                                           As Boolean
         If Not IsNothing(cStart) AndAlso cStart.IsFolder Then
@@ -2386,7 +2420,7 @@ Public Class CShItem
                 IsFolderRel = True
             End If
         Else         'XP or above
-            If CBool(attrFlag And SFGAO.FOLDER) AndAlso _
+            If CBool(attrFlag And SFGAO.FOLDER) AndAlso
                Not CBool(attrFlag And SFGAO.STREAM) Then   'is folder
                 IsFolderRel = True
             End If
@@ -2414,7 +2448,7 @@ Public Class CShItem
             Do While HR = NOERROR AndAlso itemCnt > 0 AndAlso Not ptr.Equals(IntPtr.Zero)
                 'BEGIN new code (12/11/09)
                 Dim ItemIsFolder As Boolean = IsFolderRel(ptr)
-                If ItemIsFolder And Not CBool(flags And SHCONTF.FOLDERS) OrElse _
+                If ItemIsFolder And Not CBool(flags And SHCONTF.FOLDERS) OrElse
                   (Not ItemIsFolder And Not CBool(flags And SHCONTF.NONFOLDERS)) Then
                     Marshal.FreeCoTaskMem(ptr)
                 Else
@@ -2806,8 +2840,8 @@ HRError:  'not ready disks will return the following error
     '''<param name = "b">A single dimension Byte Array</param>
     '''<param name = "sPos">Optional start index of area to dump (default = 0)</param>
     '''<param name = "epos">Optional last index position to dump (default = end of array)</param>
-    Public Shared Sub DumpHex(ByVal b() As Byte, _
-                            Optional ByVal sPos As Integer = 0, _
+    Public Shared Sub DumpHex(ByVal b() As Byte,
+                            Optional ByVal sPos As Integer = 0,
                             Optional ByVal ePos As Integer = 0)
         If ePos = 0 Then ePos = b.Length - 1
         Dim j As Integer
@@ -2960,6 +2994,7 @@ HRError:  'not ready disks will return the following error
         Marshal.FreeCoTaskMem(m_Pidl)
         m_Pidl = newPidl
         If Me.IsFolder Then
+            Me.UpdateFolder = True                '05/22/2015 Where it should have always been done
             If m_Files IsNot Nothing Then
                 For Each item As CShItem In m_Files
                     item.UpdateFolderPidlAndPath()
@@ -2967,7 +3002,7 @@ HRError:  'not ready disks will return the following error
             End If
             If m_Directories IsNot Nothing Then
                 For Each item As CShItem In m_Directories
-                    item.UpdateFolder = True
+                    'item.UpdateFolder = True       '05/22/2015 Relocated this
                     item.UpdateFolderPidlAndPath()
                 Next
             End If
@@ -2984,6 +3019,7 @@ HRError:  'not ready disks will return the following error
     ''' <param name="changeType">The type of change.</param>
     ''' <remarks>Serves as a bridge between CShItemUpdater and the CShItem that should handle a change.</remarks>
     Friend Sub Update(ByVal newPidl As IntPtr, ByVal changeType As CShItemUpdateType)
+        Debug.WriteLine("Entered Update: " & changeType.ToString)
         Select Case changeType
             Case CShItemUpdateType.Renamed      'Item has been renamed or moved
 
@@ -3083,7 +3119,7 @@ UPDATED:        ResetInfo()
         If CSI Is m_Recycle Then Exit Sub '6/21/2012
         CSI.UpdateRefresh()
         If CSI.m_Directories IsNot Nothing Then
-            For Each FolderItem As CShItem In CSI.Directories
+            For Each FolderItem As CShItem In CSI.m_Directories '02/18/2014 Using Directories here is redundant, causing an extra UpdateRefresh
                 DoUpdateDir(FolderItem)
             Next
         End If
